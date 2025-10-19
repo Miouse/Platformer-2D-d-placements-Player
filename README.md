@@ -1,9 +1,8 @@
 
 # Platformer 2D – Déplacements du joueur (Débutant)
 
-![Aperçu du niveau](docs/screenshot.png)
 
-Un mini-projet Godot **très simple** pour apprendre les bases d’un platformer 2D : un joueur qui se déplace à gauche/droite et saute, avec **3 plateformes** fixes. Idéal pour débuter et servir de point de départ à vos propres expériences.
+Un mini-projet Godot **très simple** pour apprendre les bases d’un platformer 2D : un joueur qui se déplace à gauche/droite et saute, avec **3 plateformes** fixes.
 
 ---
 
