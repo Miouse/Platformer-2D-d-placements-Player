@@ -1,86 +1,82 @@
+# Platformer 2D — Godot 4
 
-# Platformer 2D – Déplacements du joueur (Débutant)
+Un petit jeu de plateforme 2D réalisé avec **Godot Engine 4**.  
+Le joueur se déplace et saute de plateforme en plateforme. S’il **tombe dans le vide**, on affiche une scène **Game Over** 
 
-
-Un mini-projet Godot **très simple** pour apprendre les bases d’un platformer 2D : un joueur qui se déplace à gauche/droite et saute, avec **3 plateformes** fixes.
-
----
-
-## 🎮 Contrôles
-
-- `Q` : aller à **gauche**
-- `D` : aller à **droite**
-- `Espace` : **sauter**
-
-> Remarque : les touches `Q`/`D` sont adaptées à un clavier **AZERTY** (français).
 
 ---
 
-## ✨ Fonctionnalités
-
-- Mouvement horizontal simple (accélération/arrêt basiques)
-- Saut unique (sans double-saut)
-- 3 plateformes statiques
-- Caméra 2D cadrée sur la zone de jeu
-- Projet minimal pour **comprendre** et **modifier** facilement
+## 🚀 Prérequis
+- **Godot 4.5+** (version stable recommandée)
+- Clavier (touches configurées dans l’Input Map)
 
 ---
 
-## 🧰 Prérequis
-
-- **Godot 4.5** (ou supérieur)
-- OS : Windows / macOS / Linux
-
-> Si vous utilisez une autre version de Godot, ouvrez le projet ; l’éditeur proposera une migration automatique si nécessaire.
-
----
-
-## ▶️ Lancer le projet
-
-1. Ouvrez **Godot** puis **Import > Browse** et sélectionnez le fichier `project.godot` du dépôt.
-2. Cliquez sur **Run** (touche `F5`) pour jouer.
-3. La scène principale s’appelle souvent `level.tscn` (ou `Level`).
-
----
-
-## 🗂️ Structure suggérée
-
+## 📁 Structure du projet
 ```
 res://
-├─ Level/           # Scène du niveau (plateformes, limites, caméra)
-│  └─ level.tscn
-├─ Player/          # Scène + script du joueur
-│  ├─ player.tscn
-│  └─ player.gd
-├─ assets/          # (optionnel) sprites, icônes
-└─ project.godot
+├── Level/
+│   ├── level.tscn
+│   └── map/                 # ressources pour le décor / tilemap
+├── Player/
+│   ├── player.tscn
+│   └── player.gd            # script du joueur
+├── Menu/
+│   ├── menu.tscn
+│   └── menu.gd (optionnel)
+├── Game_over/
+│   ├── game_over.tscn
+│   └── game_over.gd (optionnel)
+└── assets/                   # sprites (ex : tile_0002.png, tilemap_packed.png, ...)
 ```
 
 ---
 
-## ⚙️ Paramètres importants (idées)
-
-- Vitesse de déplacement : `move_speed` (ex. 200–300)
-- Force du saut : `jump_velocity` (ex. -400 à -600)
-- Gravité : `gravity` (ex. 900–1300)
-
-> Ajustez ces valeurs dans `player.gd` pour trouver un feeling qui vous plaît.
+## ▶️ Lancer le jeu
+1. Ouvrez le dossier du projet dans **Godot 4**.
+2. Dans le panneau **Projet → Paramètres du projet → Général → Application**, définissez la **scène principale** (ex : `res://Menu/menu.tscn`).
+3. Appuyez sur **F5** pour exécuter.
 
 ---
 
-## ✅ Objectifs pédagogiques
+## 🎮 Contrôles (Input Map)
+Dans **Projet → Paramètres du projet → Input Map**, vérifiez que ces actions existent :
 
-- Comprendre la **Kinematic/CharacterBody2D** (détection du sol, `velocity`)
-- Lire/modifier un **script GDScript** simple
-- Gérer les **entrées clavier** dans Godot (`Input.is_action_pressed` …)
-- Placer et configurer des **StaticBody2D/CollisionShape2D** pour les plateformes
+- `move_left`  → `A` ou `←`
+- `move_right` → `D` ou `→`
+- `jump`       → `Espace`
 
 ---
 
-## 🚀 Aller plus loin (TODO)
+## ⚙️ Réglages utiles
+- **Hauteur de saut** : rendez `JUMP_VELOCITY` plus négatif (ex. `-360.0`) pour sauter plus haut.
+- **Sensation de chute** : augmentez `FALL_MULT` (1.8 → 2.2) pour un jeu moins “flottant”.
+- **Petit saut** : augmentez `CUT_MULT` (3.0 → 3.5) si le joueur garde trop d’élan en relâchant.
+- **Vitesse max de chute** : `MAX_FALL_SPEED` (1200–1800 selon l’échelle de votre niveau).
+- **Limite de mort** : modifiez `position.y > 500.0` selon la taille de votre niveau.
 
-- Ajouter un **double-saut**
-- Mettre des **animations** (idle/run/jump)
-- Ajouter des **collectibles** (pièces, étoiles)
-- Créer un **menu** de démarrage et un **UI** de score/temps
+
+## 🧩 Dépannage
+- **`Parameter "new_scene" is null` / `node count is 0`**  
+  - Le chemin de scène est faux (attention à la casse sur Linux).  
+  - La scène `.tscn` est vide ou non sauvegardée. Ouvrez-la et assurez-vous d’avoir un **nœud racine** puis **sauvegardez**.
+
+- **Le joueur traverse certaines plateformes**  
+  - Vérifiez les **Layer/Mask** de collision du `TileMap` et du `Player` (Collider).  
+  - Utilisez `move_and_slide()` sur un `CharacterBody2D` (ce projet le fait déjà).
+
+---
+
+## 🛠️ Export
+1. **Projet → Exporter** et ajoutez une **préréglage** (Windows / Linux / HTML5…).  
+2. Vérifiez la **scène principale** et exportez le bundle.
+
+---
+
+## 📝 Roadmap / idées
+- HUD simple (vies/monnaie/temps)   
+- **Points de contrôle** (Checkpoints)  
+- **Ennemis** & dégâts  
+- **Sons** (saut, chute, victoire) et musique
+
 
