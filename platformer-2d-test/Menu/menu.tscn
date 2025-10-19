@@ -1,0 +1,70 @@
+[gd_scene load_steps=5 format=3 uid="uid://q2d48m0qf0x7"]
+
+[ext_resource type="Script" uid="uid://14ykapfk1p34" path="res://Menu/menu.gd" id="1_rwxi6"]
+
+[sub_resource type="Gradient" id="Gradient_j7vem"]
+offsets = PackedFloat32Array(0, 0.99404764, 1)
+colors = PackedColorArray(0.019607844, 0.09411765, 0.5254902, 1, 0.019607844, 0.09411765, 0.5254902, 1, 0.019607844, 0.35686275, 0.6666667, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rwxi6"]
+gradient = SubResource("Gradient_j7vem")
+
+[sub_resource type="LabelSettings" id="LabelSettings_j7vem"]
+font_size = 64
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rwxi6")
+
+[node name="fond" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1153.0
+offset_bottom = 651.0
+texture = SubResource("GradientTexture1D_rwxi6")
+
+[node name="Titre" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -267.0
+offset_top = 101.0
+offset_right = 268.0
+offset_bottom = 189.0
+grow_horizontal = 2
+text = "MENU PRINCIPAL"
+label_settings = SubResource("LabelSettings_j7vem")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -194.0
+offset_top = -54.0
+offset_right = 195.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="B_start" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "START"
+
+[node name="B_quit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Quiter
+"
+
+[connection signal="button_down" from="VBoxContainer/B_start" to="." method="_on_b_start_button_down"]
+[connection signal="button_down" from="VBoxContainer/B_quit" to="." method="_on_b_quit_button_down"]
